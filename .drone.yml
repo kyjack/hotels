@@ -1,0 +1,24 @@
+kind: pipeline
+name: default
+
+steps:
+  - name: install dependencies
+    image: node:14
+    commands:
+      - npm install
+
+  - name: run tests
+    image: node:14
+    commands:
+      - npm test
+
+  - name: deploy
+    image: node:14
+    commands:
+      - npm install
+      - npm start
+    environment:
+      production: true
+    when:
+      branch:
+        - master
